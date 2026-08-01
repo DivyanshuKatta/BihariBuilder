@@ -259,14 +259,7 @@
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top-color: white;
   border-radius: 50%;
-  animation: btn-spin 0.6s linear infinite;
-}
-
-.btn-primary.btn-loading::after  { border-top-color: white; }
-.btn-secondary.btn-loading::after{ border-top-color: var(--color-copper); }
-
-@keyframes btn-spin {
-  to { transform: rotate(360deg); }
+  animation: spin 0.6s linear infinite;
 }
 
 /* =========================================================

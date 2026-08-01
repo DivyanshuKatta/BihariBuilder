@@ -128,6 +128,31 @@ hr {
 }
 
 /* =========================================================
+   ACCESSIBILITY — Skip Link Focus State
+   ========================================================= */
+
+.sr-only:focus {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: auto;
+  height: auto;
+  padding: var(--space-3) var(--space-6);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: var(--color-copper);
+  color: var(--color-white);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-loader);
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+/* =========================================================
    PRINT — Hide non-essential UI
    ========================================================= */
 

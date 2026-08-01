@@ -65,7 +65,7 @@
 
   --text-heading: var(--color-anthracite);   /* #2F3133 */
   --text-body:    var(--neutral-700);        /* #505255 */
-  --text-muted:   var(--color-concrete);     /* #8D8D83 */
+  --text-muted:   var(--neutral-600);        /* #6F716D - WCAG AA 4.5:1 compliant */
   --text-light:   var(--color-white);
   --text-link:    var(--color-copper);
   --text-link-hover: var(--color-copper-dark);
