@@ -152,6 +152,21 @@
   transition: opacity var(--transition-fast);
 }
 
+/* Dynamic Logo Toggling (White over dark header, Dark over white scrolled header) */
+.site-header:not(.is-scrolled) .navbar__logo-img--white {
+  display: block !important;
+}
+.site-header:not(.is-scrolled) .navbar__logo-img--dark {
+  display: none !important;
+}
+
+.site-header.is-scrolled .navbar__logo-img--white {
+  display: none !important;
+}
+.site-header.is-scrolled .navbar__logo-img--dark {
+  display: block !important;
+}
+
 .navbar__logo:hover img {
   opacity: 0.85;
 }

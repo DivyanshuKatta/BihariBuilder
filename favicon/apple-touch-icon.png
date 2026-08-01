@@ -1,5 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="8" fill="#B4643C"/>
-  <path d="M6 24 L16 8 L26 24 Z" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-  <path d="M12 24 L16 16 L20 24 Z" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#081C3A"/>
+  <!-- Geometric B Monogram -->
+  <path d="M12 12 H28 C36 12 42 17 42 24 C42 30 36 34 28 34 H12 Z" fill="none" stroke="#0FA3A3" stroke-width="4.5"/>
+  <path d="M12 30 H32 C41 30 47 36 47 44 C47 52 40 56 30 56 H12 Z" fill="none" stroke="#FFFFFF" stroke-width="4.5"/>
+  <path d="M12 12 H22 V56 H12 Z" fill="#FFFFFF"/>
+  <!-- Flowing River Base -->
+  <path d="M6 52 C20 46 36 58 58 48" fill="none" stroke="#FF8C1A" stroke-width="3" stroke-linecap="round"/>
+  <!-- Bodhi Leaf -->
+  <path d="M46 12 C52 6 58 12 52 20 C46 20 46 12 46 12 Z" fill="#0FA3A3"/>
 </svg>

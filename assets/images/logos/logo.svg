@@ -1,9 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64">
   <g fill="none">
-    <!-- Architectural Roof Emblem -->
-    <path d="M10 42 L28 14 L46 42 Z" stroke="#B4643C" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
-    <path d="M20 42 L28 28 L36 42 Z" fill="#B4643C"/>
-    <!-- Typography -->
-    <text x="56" y="38" font-family="'Manrope', sans-serif" font-size="24" font-weight="800" fill="#2F3133" letter-spacing="-0.5">Bihari<tspan fill="#B4643C">builder</tspan></text>
+    <!-- GEOMETRIC 'B' MONOGRAM EMBLEM -->
+    <g transform="translate(4, 4)">
+      <!-- Left Architectural Stem -->
+      <path d="M4 6 H20 V50 H4 Z" fill="#081C3A"/>
+      <!-- Grid Precision Cutouts -->
+      <rect x="8" y="12" width="8" height="3" fill="#0FA3A3"/>
+      <rect x="8" y="20" width="8" height="3" fill="#0FA3A3"/>
+      <rect x="8" y="28" width="8" height="3" fill="#0FA3A3"/>
+
+      <!-- Upper Loop (Tech Arc) -->
+      <path d="M20 6 H34 C42 6 48 11 48 18 C48 25 42 30 34 30 H20 Z" fill="none" stroke="#0FA3A3" stroke-width="5" stroke-linecap="round"/>
+      <path d="M22 18 H40" stroke="#0FA3A3" stroke-width="2" stroke-dasharray="2 2"/>
+
+      <!-- Lower Loop (Structural Foundation) -->
+      <path d="M20 26 H36 C45 26 51 32 51 40 C51 48 44 54 34 54 H20 Z" fill="none" stroke="#081C3A" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Flowing River Base (Bihar Heritage & Progress Wave) -->
+      <path d="M0 50 C16 44 32 56 56 46" fill="none" stroke="#0FA3A3" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M4 55 C20 49 36 60 58 51" fill="none" stroke="#FF8C1A" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Bodhi Leaves (Knowledge, Growth & Sustainability) -->
+      <path d="M50 14 C56 8 62 14 56 22 C50 22 50 14 50 14 Z" fill="#0FA3A3"/>
+      <path d="M54 26 C60 20 65 26 60 33 C54 33 54 26 54 26 Z" fill="#FF8C1A"/>
+    </g>
+
+    <!-- TYPOGRAPHY WORDMARK -->
+    <text x="76" y="40" font-family="'Manrope', sans-serif" font-size="25" font-weight="800" letter-spacing="-0.5">
+      <tspan fill="#081C3A">Bihari</tspan><tspan fill="#0FA3A3">builder</tspan><tspan fill="#FF8C1A" font-size="18" font-weight="700">.com</tspan>
+    </text>
   </g>
 </svg>

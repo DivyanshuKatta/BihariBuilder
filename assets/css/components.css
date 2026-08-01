@@ -1400,8 +1400,8 @@
 
 .cta-banner {
   position: relative;
-  background: linear-gradient(135deg, var(--color-anthracite) 0%, #1E2022 100%);
-  padding: var(--space-16) 0; /* 64px vertical padding */
+  background: linear-gradient(135deg, var(--color-navy) 0%, #040E1E 100%);
+  padding: var(--space-20) 0; /* 80px vertical padding */
   overflow: hidden;
   color: var(--color-white);
   text-align: center;
@@ -1410,32 +1410,35 @@
 .cta-banner__bg-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(180, 100, 60, 0.28) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(15, 163, 163, 0.22) 0%, transparent 70%);
   pointer-events: none;
 }
 
 .cta-banner__inner {
   position: relative;
   z-index: 2;
-  max-width: 840px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
 .cta-banner__title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
   font-weight: var(--weight-bold);
   color: var(--color-white);
-  line-height: var(--leading-tight);
+  line-height: 1.2;
   margin-bottom: var(--space-4);
   letter-spacing: -0.02em;
 }
 
 .cta-banner__lead {
-  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.88);
-  line-height: var(--leading-relaxed);
-  margin-bottom: var(--space-8);
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: var(--weight-medium);
+  color: rgba(248, 250, 252, 0.95);
+  line-height: 1.65;
+  max-width: 760px;
+  margin: 0 auto var(--space-8) auto;
 }
 
 .cta-banner__actions {

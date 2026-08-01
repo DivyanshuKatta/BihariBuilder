@@ -13,15 +13,18 @@
      BRAND COLORS — From 03_Color_System.md
      ========================================================= */
 
-  /* Primary Brand Palette */
+  /* Primary Brand Palette — New Brand Color System */
   --color-white:          #FFFFFF;
-  --color-offwhite:       #F6F5F2;   /* 70% — main page background */
-  --color-anthracite:     #2F3133;   /* 15% — headings, nav, footer */
-  --color-copper:         #B4643C;   /*  2% — primary CTA, accents */
-  --color-copper-dark:    #9E5532;   /* copper hover state */
-  --color-copper-light:   #C97A52;   /* lighter copper tint */
-  --color-concrete:       #8D8D83;   /*  8% — borders, muted text */
-  --color-sand:           #D9C8BA;   /*  5% — alt section backgrounds */
+  --color-offwhite:       #F8FAFC;   /* Soft White — main page background */
+  --color-navy:           #081C3A;   /* Deep Navy — primary brand color */
+  --color-teal:           #0FA3A3;   /* Tech Teal — secondary tech accent */
+  --color-orange:         #FF8C1A;   /* Construction Orange — primary CTA accent */
+  --color-anthracite:     #081C3A;   /* Deep Navy — dark surfaces, nav, footer */
+  --color-copper:         #FF8C1A;   /* Construction Orange — CTA buttons & badges */
+  --color-copper-dark:    #E07A12;   /* Construction Orange hover */
+  --color-copper-light:   #0FA3A3;   /* Tech Teal tint */
+  --color-concrete:       #94A3B8;   /* Slate border & muted text */
+  --color-sand:           #F1F5F9;   /* Soft Slate — alt section backgrounds */
 
   /* Neutral Scale */
   --neutral-50:  #FCFCFB;
