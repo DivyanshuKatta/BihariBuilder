@@ -1041,3 +1041,174 @@
   color: var(--text-muted);
   font-weight: var(--weight-medium);
 }
+
+/* =========================================================
+   CONSTRUCTION PROCESS TIMELINE
+   ========================================================= */
+
+.process-section {
+  position: relative;
+  background-color: var(--bg-page); /* Off-white */
+}
+
+/* Desktop Horizontal Timeline Layout (>=992px) */
+@media (min-width: 992px) {
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  /* Connecting line behind markers */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 38px;
+    left: 8%;
+    right: 8%;
+    height: 3px;
+    background: var(--border-medium);
+    z-index: 1;
+  }
+
+  .timeline__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--space-6);
+  }
+
+  .timeline__number {
+    font-size: var(--text-caption);
+    font-weight: var(--weight-bold);
+    color: var(--color-copper);
+    margin-bottom: var(--space-1);
+  }
+
+  .timeline__icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-round);
+    background: var(--color-white);
+    border: 3px solid var(--color-copper);
+    color: var(--color-copper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .timeline__step:hover .timeline__icon-wrap {
+    transform: scale(1.1);
+    background: var(--color-copper);
+    color: var(--color-white);
+  }
+
+  .timeline__content {
+    background: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .timeline__step:hover .timeline__content {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Mobile & Tablet Vertical Timeline Layout (<992px) */
+@media (max-width: 991px) {
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    position: relative;
+    padding-left: 64px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 28px;
+    width: 3px;
+    background: var(--border-medium);
+    z-index: 1;
+  }
+
+  .timeline__step {
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline__marker {
+    position: absolute;
+    left: -64px;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline__number {
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    color: var(--color-copper);
+    margin-bottom: 2px;
+  }
+
+  .timeline__icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-round);
+    background: var(--color-white);
+    border: 2px solid var(--color-copper);
+    color: var(--color-copper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .timeline__content {
+    background: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.timeline__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h5);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.timeline__text {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
