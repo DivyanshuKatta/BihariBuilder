@@ -930,3 +930,114 @@
   gap: var(--space-3);
   margin-top: var(--space-2);
 }
+
+/* =========================================================
+   WHY BIHARIBUILDER SECTION & STATS CARDS
+   ========================================================= */
+
+.why-biharibuilder {
+  position: relative;
+  background-color: var(--bg-section-alt); /* Sand background */
+}
+
+.why-biharibuilder__image-card {
+  position: relative;
+  border-radius: var(--radius-image);
+}
+
+.why-biharibuilder__image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-image);
+  display: block;
+}
+
+/* Floating Experience Badge */
+.why-biharibuilder__floating-badge {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  background: var(--color-white);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+@media (max-width: 575px) {
+  .why-biharibuilder__floating-badge {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    margin-top: var(--space-4);
+  }
+}
+
+.why-biharibuilder__badge-number {
+  font-size: 2.25rem;
+  color: var(--color-copper);
+  line-height: 1;
+  font-weight: var(--weight-bold);
+}
+
+.why-biharibuilder__badge-text {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: var(--weight-semibold);
+}
+
+/* Feature Checklist */
+.why-biharibuilder__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+}
+
+.why-biharibuilder__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-body);
+  color: var(--text-body);
+}
+
+.why-biharibuilder__icon {
+  color: var(--color-copper);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Stat Cards */
+.stat-card {
+  background: var(--color-white);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card__number {
+  font-size: 1.75rem;
+  color: var(--color-copper);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+}
+
+.stat-card__label {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: var(--weight-medium);
+}
