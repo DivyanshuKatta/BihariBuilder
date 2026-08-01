@@ -1212,3 +1212,149 @@
   line-height: var(--leading-relaxed);
   margin: 0;
 }
+
+/* =========================================================
+   TESTIMONIALS SECTION & PLACEHOLDER CARD
+   ========================================================= */
+
+.testimonials-section {
+  position: relative;
+  background-color: var(--bg-section-alt); /* Sand background */
+}
+
+.testimonials__showcase {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.card-testimonial--placeholder {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-testimonial__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(180, 100, 60, 0.08);
+  color: var(--color-copper);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-4);
+}
+
+.card-testimonial__stars {
+  display: flex;
+  gap: 4px;
+  color: #F59E0B; /* Gold star color */
+  margin-bottom: var(--space-4);
+}
+
+.card-testimonial__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-h4);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-3);
+}
+
+.card-testimonial__text {
+  font-size: var(--text-body);
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+  max-width: 56ch;
+}
+
+/* =========================================================
+   CTA BANNER SECTION
+   ========================================================= */
+
+.cta-banner {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-anthracite) 0%, #1E2022 100%);
+  padding: var(--space-16) 0; /* 64px vertical padding */
+  overflow: hidden;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.cta-banner__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(180, 100, 60, 0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-banner__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.cta-banner__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.02em;
+}
+
+.cta-banner__lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+.cta-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 575px) {
+  .cta-banner__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cta-banner__btn {
+    width: 100%;
+  }
+}
+
+.cta-banner__guarantees {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  font-size: var(--text-caption);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cta-banner__guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cta-banner__guarantee svg {
+  color: var(--color-copper-light);
+}
