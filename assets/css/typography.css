@@ -1,0 +1,271 @@
+/*
+ * typography.css
+ * Biharibuilder Design System — Typography System
+ * Version: 1.0
+ *
+ * Implements the complete typographic scale:
+ * Headings: Manrope 700
+ * Body: Inter 400–500
+ * Display: Space Grotesk (hero numbers & accent only)
+ *
+ * Uses clamp() for fluid scaling. Mobile-first approach.
+ */
+
+/* =========================================================
+   GOOGLE FONTS — Loaded via HTML <head>
+   Fonts: Manrope (300,400,500,600,700)
+          Inter (400,500,600)
+          Space Grotesk (400,500,700)
+   ========================================================= */
+
+/* =========================================================
+   HEADING CLASSES
+   ========================================================= */
+
+/* Hero Headline — 64px desktop → 36px mobile */
+.text-hero {
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+/* Page Hero — 48px desktop → 32px mobile */
+.text-page-hero {
+  font-family: var(--font-heading);
+  font-size: var(--text-page-hero);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+/* Section Title — 40px desktop → 28px mobile */
+.text-section {
+  font-family: var(--font-heading);
+  font-size: var(--text-section);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+/* Sub Heading — 32px desktop → 22px mobile */
+.text-subheading {
+  font-family: var(--font-heading);
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+}
+
+/* Card Title — 24px desktop → 18px mobile */
+.text-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+}
+
+/* Body Text */
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+}
+
+/* Small Text */
+.text-small {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+}
+
+/* Caption */
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+
+/* Display Text — Space Grotesk, used sparingly for hero numbers */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-heading);
+}
+
+/* =========================================================
+   HEADING SEMANTIC TAGS — default sizes
+   ========================================================= */
+
+h1 {
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2 {
+  font-size: var(--text-section);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-semibold);
+}
+
+h4 {
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-semibold);
+}
+
+h5 {
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+}
+
+h6 {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* =========================================================
+   COLOR MODIFIERS
+   ========================================================= */
+
+.text-heading-color  { color: var(--text-heading); }
+.text-body-color     { color: var(--text-body);    }
+.text-muted-color    { color: var(--text-muted);   }
+.text-white-color    { color: var(--text-light);   }
+.text-copper-color   { color: var(--color-copper); }
+
+/* =========================================================
+   ALIGNMENT
+   ========================================================= */
+
+.text-left   { text-align: left;   }
+.text-center { text-align: center; }
+.text-right  { text-align: right;  }
+
+/* =========================================================
+   WEIGHT MODIFIERS
+   ========================================================= */
+
+.font-regular   { font-weight: var(--weight-regular);  }
+.font-medium    { font-weight: var(--weight-medium);   }
+.font-semibold  { font-weight: var(--weight-semibold); }
+.font-bold      { font-weight: var(--weight-bold);     }
+
+/* =========================================================
+   SECTION LABEL — Overline style above section headings
+   ========================================================= */
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-4);
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-copper);
+  border-radius: var(--radius-round);
+}
+
+/* =========================================================
+   SECTION HEADER BLOCK
+   Used above every major section.
+   ========================================================= */
+
+.section-header {
+  margin-bottom: var(--space-12);
+}
+
+.section-header--centered {
+  text-align: center;
+}
+
+.section-header--centered p {
+  margin-inline: auto;
+}
+
+.section-header .section-label {
+  margin-bottom: var(--space-3);
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-4);
+}
+
+.section-header p {
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  max-width: 60ch;
+  line-height: var(--leading-relaxed);
+}
+
+/* Dark section overrides */
+.section-dark .section-label {
+  color: var(--color-copper-light);
+}
+
+.section-dark .section-label::before {
+  background: var(--color-copper-light);
+}
+
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+  color: var(--color-white);
+}
+
+.section-dark p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================
+   BLOCKQUOTE
+   ========================================================= */
+
+blockquote {
+  border-left: 3px solid var(--color-copper);
+  padding-left: var(--space-6);
+  margin-left: 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   LEAD PARAGRAPH
+   ========================================================= */
+
+.lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem); /* 17–20px */
+  font-weight: var(--weight-regular);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+}

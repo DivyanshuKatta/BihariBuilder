@@ -1,0 +1,376 @@
+/*
+ * responsive.css
+ * Biharibuilder Design System — Responsive Breakpoints
+ * Version: 1.0
+ *
+ * Mobile-first approach. Breakpoints:
+ *   360px  — small mobile
+ *   576px  — large mobile
+ *   768px  — tablet
+ *   992px  — tablet landscape / small desktop
+ *   1200px — laptop
+ *   1440px — desktop
+ *   1600px — large desktop
+ *
+ * This file handles cross-component responsive overrides only.
+ * Component-level responsiveness lives in each component file.
+ */
+
+/* =========================================================
+   SMALL MOBILE — 320–359px
+   ========================================================= */
+
+@media (max-width: 359px) {
+
+  .container {
+    padding-inline: var(--space-4); /* 16px on very small screens */
+  }
+
+  .btn {
+    padding-inline: var(--space-6); /* slightly compressed */
+  }
+
+  .estimate-form-card {
+    padding: var(--space-6);
+  }
+
+  .card__body {
+    padding: var(--space-6);
+  }
+
+  /* Hero typography squeeze */
+  h1 {
+    font-size: 2rem;  /* 32px forced floor */
+  }
+
+  .navbar__mobile-cta {
+    display: none; /* too cramped at 320 */
+  }
+}
+
+/* =========================================================
+   MOBILE — 360–575px
+   ========================================================= */
+
+@media (max-width: 575px) {
+
+  /* Buttons full width in hero/CTA contexts */
+  .hero .btn-group .btn,
+  .cta-banner .btn {
+    width: 100%;
+  }
+
+  /* Section padding reduction */
+  .section {
+    padding-block: var(--space-10); /* 40px */
+  }
+
+  /* Reduce section heading size slightly */
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  /* Stats — 2 columns */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Timeline — force vertical */
+  .timeline {
+    flex-direction: column;
+  }
+
+  /* Footer newsletter form stacked */
+  .footer__newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer__newsletter-btn {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   LARGE MOBILE — 576px+
+   ========================================================= */
+
+@media (min-width: 576px) {
+
+  .container {
+    padding-inline: var(--space-8); /* 32px */
+  }
+
+  /* Two-column trust badges */
+  .trust-badges {
+    gap: var(--space-4);
+  }
+}
+
+/* =========================================================
+   TABLET — 768px+
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  /* Section padding increase */
+  .section {
+    padding-block: var(--space-16); /* 64px */
+  }
+
+  /* Hero layout — two columns */
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    gap: var(--space-8);
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* Estimate form card max width on tablet */
+  .estimate-form-card {
+    max-width: 100%;
+  }
+
+  /* Two-column form layout */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  /* Card grid — 2 columns */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Stats — 4 columns */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Footer — 2 columns */
+  .footer__main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   TABLET LANDSCAPE / SMALL DESKTOP — 992px+
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+  /* Show desktop navigation */
+  .navbar__nav {
+    display: flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .navbar__cta {
+    display: inline-flex;
+  }
+
+  .navbar__mobile-left,
+  .navbar__mobile-logo,
+  .navbar__mobile-right {
+    display: none;
+  }
+
+  /* Show utility bar */
+  .utility-bar {
+    display: flex;
+  }
+}
+
+/* =========================================================
+   LAPTOP — 1200px+
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  /* Full desktop section padding */
+  .section {
+    padding-block: var(--space-24); /* 96px */
+  }
+
+  /* Desktop container padding */
+  .container {
+    padding-inline: var(--space-12); /* 48px */
+  }
+
+  /* 3-column cards */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 4-column footer */
+  .footer__main {
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  }
+
+  /* Desktop hero — proper layout */
+  .hero__inner {
+    grid-template-columns: 55fr 45fr;
+    min-height: 100vh;
+    min-height: 100svh; /* dynamic viewport height */
+  }
+
+  /* Estimate form card width */
+  .estimate-form-card {
+    max-width: 420px;
+    min-width: 380px;
+  }
+}
+
+/* =========================================================
+   DESKTOP — 1440px+
+   ========================================================= */
+
+@media (min-width: 1440px) {
+
+  /* Container max enforced */
+  .container {
+    max-width: var(--container-max); /* 1280px */
+  }
+
+  /* Section heading typography maximum */
+  h1 {
+    font-size: 4rem; /* 64px hard cap */
+  }
+
+  h2 {
+    font-size: 2.5rem; /* 40px hard cap */
+  }
+
+  /* 4-column service cards */
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Larger section padding */
+  .section--large {
+    padding-block: var(--space-32); /* 128px */
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP — 1600px+
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .container {
+    max-width: var(--container-large); /* 1440px */
+  }
+
+  .footer__description {
+    max-width: 36ch;
+  }
+}
+
+/* =========================================================
+   HOVER MEDIA QUERY
+   Only apply hover effects on devices that support true hover.
+   ========================================================= */
+
+@media (hover: none) {
+
+  /* On touch devices: no hover lifts (already in native feel) */
+  .card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  /* Floating buttons — always visible, no hover scale */
+  .btn-icon:hover {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE PHONE HANDLING
+   ========================================================= */
+
+@media (max-height: 480px) and (orientation: landscape) {
+
+  .hero {
+    min-height: auto;
+    padding-block: var(--space-12);
+  }
+
+  .hero__inner {
+    min-height: auto;
+    padding-block: var(--space-12);
+  }
+
+  /* Hide utility bar in landscape phone */
+  .utility-bar {
+    display: none;
+  }
+}
+
+/* =========================================================
+   HIGH DPI DISPLAYS
+   ========================================================= */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+  /* Prefer WebP for high DPI (handled via <picture> in HTML) */
+
+  .hamburger__line {
+    height: 1.5px;
+  }
+}
+
+/* =========================================================
+   PRINT STYLES
+   ========================================================= */
+
+@media print {
+
+  /* Remove decorative elements */
+  .site-header,
+  .site-footer,
+  .fab-container,
+  .mobile-drawer,
+  .drawer-overlay,
+  .utility-bar {
+    display: none !important;
+  }
+
+  /* Force white background */
+  body {
+    background: white;
+    color: black;
+  }
+
+  /* Preserve contact info */
+  .footer__contact-item {
+    display: flex;
+    color: black;
+  }
+
+  /* Remove box shadows */
+  .card,
+  .btn {
+    box-shadow: none;
+  }
+
+  /* Remove animations */
+  [data-animation] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+}

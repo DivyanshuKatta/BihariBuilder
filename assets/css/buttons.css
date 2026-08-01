@@ -1,0 +1,288 @@
+/*
+ * buttons.css
+ * Biharibuilder Design System — Button System
+ * Version: 1.0
+ *
+ * All button variants. Never create custom buttons outside this system.
+ *
+ * Button hierarchy:
+ *   .btn              — base
+ *   .btn-primary      — Copper bg, white text (primary CTA)
+ *   .btn-secondary    — White bg, Copper border & text
+ *   .btn-outline      — Transparent, Copper text, underline hover (ghost)
+ *   .btn-icon         — Circle icon button
+ *
+ * Size modifiers:
+ *   .btn-large        — taller, more padding
+ *   .btn-small        — compact
+ *   .btn-full         — full width
+ *
+ * State modifiers:
+ *   .btn-loading      — shows spinner
+ *   :disabled         — reduced opacity, no interaction
+ */
+
+/* =========================================================
+   BASE BUTTON
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  height: var(--form-input-height); /* 52px */
+  padding-inline: var(--space-8);   /* 32px */
+
+  font-family: var(--font-body);
+  font-size: var(--text-small);     /* 16px */
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  line-height: 1;
+
+  border: 2px solid transparent;
+  border-radius: var(--radius-btn);  /* 12px */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  user-select: none;
+
+  transition:
+    background-color var(--transition-btn),
+    border-color     var(--transition-btn),
+    color            var(--transition-btn),
+    box-shadow       var(--transition-btn),
+    transform        var(--transition-btn);
+}
+
+/* Focus state — copper outline */
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+/* Disabled state */
+.btn:disabled,
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =========================================================
+   PRIMARY BUTTON — Copper background, white text
+   ========================================================= */
+
+.btn-primary {
+  background-color: var(--color-copper);
+  border-color: var(--color-copper);
+  color: var(--color-white);
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-copper-dark);
+  border-color: var(--color-copper-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(180, 100, 60, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-btn);
+}
+
+/* =========================================================
+   SECONDARY BUTTON — White bg, Copper border & text
+   ========================================================= */
+
+.btn-secondary {
+  background-color: var(--color-white);
+  border-color: var(--color-copper);
+  color: var(--color-copper);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-sand);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Dark section variant of secondary */
+.section--dark .btn-secondary,
+.bg-dark .btn-secondary {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+}
+
+.section--dark .btn-secondary:hover,
+.bg-dark .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-white);
+}
+
+/* =========================================================
+   OUTLINE / GHOST BUTTON — Transparent, copper text
+   ========================================================= */
+
+.btn-outline {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-copper);
+  padding-inline: var(--space-4);
+  height: auto;
+  min-height: 44px;
+}
+
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: var(--space-4);
+  right: var(--space-4);
+  height: 1px;
+  background: var(--color-copper);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+}
+
+.btn-outline:hover::after {
+  transform: scaleX(1);
+}
+
+.btn-outline:hover {
+  color: var(--color-copper-dark);
+  transform: none;
+}
+
+/* =========================================================
+   ICON BUTTON — Circle button for WhatsApp, Phone, Social
+   ========================================================= */
+
+.btn-icon {
+  width: var(--fab-size);   /* 60px */
+  height: var(--fab-size);
+  min-width: var(--fab-size);
+  border-radius: var(--radius-round);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-copper);
+  border-color: var(--color-copper);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform    var(--transition-btn),
+    box-shadow   var(--transition-btn);
+}
+
+.btn-icon:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-icon:active {
+  transform: scale(0.97);
+}
+
+/* WhatsApp specific */
+.btn-icon--whatsapp {
+  background-color: #25D366;
+  border-color: #25D366;
+}
+
+.btn-icon--whatsapp:hover {
+  background-color: #20BA58;
+  border-color: #20BA58;
+}
+
+/* Phone specific */
+.btn-icon--phone {
+  background-color: var(--color-copper);
+  border-color: var(--color-copper);
+}
+
+/* =========================================================
+   SIZE MODIFIERS
+   ========================================================= */
+
+/* Large — for hero CTAs */
+.btn-large {
+  height: 60px;
+  padding-inline: var(--space-10);  /* 40px */
+  font-size: 1.0625rem;             /* 17px */
+}
+
+/* Small — for inline links and compact UIs */
+.btn-small {
+  height: 40px;
+  padding-inline: var(--space-6);   /* 24px */
+  font-size: var(--text-caption);   /* 14px */
+  border-radius: var(--radius-sm);  /* 8px */
+}
+
+/* Full width */
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* =========================================================
+   LOADING STATE — Spinning indicator
+   ========================================================= */
+
+.btn-loading {
+  pointer-events: none;
+  position: relative;
+  color: transparent !important;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+.btn-primary.btn-loading::after  { border-top-color: white; }
+.btn-secondary.btn-loading::after{ border-top-color: var(--color-copper); }
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   BUTTON GROUPS — side by side
+   ========================================================= */
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+/* Full-width buttons on mobile */
+@media (max-width: 575px) {
+  .btn-group--mobile-full .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,286 @@
+/*
+ * variables.css
+ * Biharibuilder Design System — CSS Custom Properties
+ * Version: 1.0
+ *
+ * RULE: All colors, spacing, typography and design tokens MUST use these
+ * variables. Never hardcode values anywhere else in the codebase.
+ */
+
+:root {
+
+  /* =========================================================
+     BRAND COLORS — From 03_Color_System.md
+     ========================================================= */
+
+  /* Primary Brand Palette */
+  --color-white:          #FFFFFF;
+  --color-offwhite:       #F6F5F2;   /* 70% — main page background */
+  --color-anthracite:     #2F3133;   /* 15% — headings, nav, footer */
+  --color-copper:         #B4643C;   /*  2% — primary CTA, accents */
+  --color-copper-dark:    #9E5532;   /* copper hover state */
+  --color-copper-light:   #C97A52;   /* lighter copper tint */
+  --color-concrete:       #8D8D83;   /*  8% — borders, muted text */
+  --color-sand:           #D9C8BA;   /*  5% — alt section backgrounds */
+
+  /* Neutral Scale */
+  --neutral-50:  #FCFCFB;
+  --neutral-100: #F6F5F2;
+  --neutral-200: #EBE9E5;
+  --neutral-300: #D9D6D1;
+  --neutral-400: #BEB8AF;
+  --neutral-500: #8D8D83;
+  --neutral-600: #6F716D;
+  --neutral-700: #505255;
+  --neutral-800: #2F3133;
+  --neutral-900: #1B1D1E;
+
+  /* Semantic Colors */
+  --color-success: #3C7A4A;
+  --color-warning: #C78A1D;
+  --color-error:   #B33A3A;
+  --color-info:    #2F6EA5;
+
+  /* =========================================================
+     BACKGROUND TOKENS
+     ========================================================= */
+
+  --bg-page:         var(--color-offwhite);
+  --bg-section-light: var(--color-white);
+  --bg-section-alt:  var(--color-sand);
+  --bg-dark:         var(--color-anthracite);
+  --bg-footer:       var(--neutral-900);    /* #1B1D1E */
+
+  /* Surface Tokens */
+  --surface-card:     var(--color-white);
+  --surface-elevated: var(--neutral-50);
+  --surface-overlay:  rgba(47, 49, 51, 0.72);
+
+  /* Hero Overlay */
+  --hero-overlay: rgba(0, 0, 0, 0.40);
+
+  /* =========================================================
+     TEXT TOKENS
+     ========================================================= */
+
+  --text-heading: var(--color-anthracite);   /* #2F3133 */
+  --text-body:    var(--neutral-700);        /* #505255 */
+  --text-muted:   var(--color-concrete);     /* #8D8D83 */
+  --text-light:   var(--color-white);
+  --text-link:    var(--color-copper);
+  --text-link-hover: var(--color-copper-dark);
+
+  /* =========================================================
+     BORDER TOKENS
+     ========================================================= */
+
+  --border-light:  var(--neutral-200);   /* #EBE9E5 */
+  --border-medium: var(--neutral-300);   /* #D9D6D1 */
+  --border-strong: var(--color-concrete);/* #8D8D83 */
+  --border-focus:  var(--color-copper);  /* #B4643C */
+
+  /* =========================================================
+     TYPOGRAPHY — From 02_Brand_Guidelines.md & 04_Design_System.md
+     ========================================================= */
+
+  /* Font Families */
+  --font-heading: 'Manrope', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+
+  /* Font Weights */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+
+  /* Typography Scale — Desktop (uses clamp for fluid scaling)
+     Hero:         clamp(36px → 64px)
+     Page Hero:    clamp(32px → 48px)
+     Section:      clamp(28px → 40px)
+     Sub Heading:  clamp(22px → 32px)
+     Card Title:   clamp(18px → 24px)
+     Body:         clamp(16px → 18px)
+     Small:        16px
+     Caption:      14px
+  */
+  --text-hero:        clamp(2.25rem, 5vw, 4rem);       /* 36–64px */
+  --text-page-hero:   clamp(2rem, 4vw, 3rem);          /* 32–48px */
+  --text-section:     clamp(1.75rem, 3.2vw, 2.5rem);   /* 28–40px */
+  --text-subheading:  clamp(1.375rem, 2.5vw, 2rem);    /* 22–32px */
+  --text-card-title:  clamp(1.125rem, 1.8vw, 1.5rem);  /* 18–24px */
+  --text-body:        clamp(1rem, 1.2vw, 1.125rem);    /* 16–18px */
+  --text-small:       1rem;                             /* 16px */
+  --text-caption:     0.875rem;                         /* 14px */
+
+  /* Line Heights */
+  --leading-tight:    1.2;
+  --leading-snug:     1.35;
+  --leading-normal:   1.6;
+  --leading-relaxed:  1.75;
+
+  /* Letter Spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+
+  /* =========================================================
+     SPACING SYSTEM — 8px base grid — From 04_Design_System.md
+     ========================================================= */
+
+  --space-1:   4px;    /* micro spacing */
+  --space-2:   8px;    /* icon spacing */
+  --space-3:  12px;
+  --space-4:  16px;    /* paragraph spacing */
+  --space-5:  20px;
+  --space-6:  24px;    /* card spacing */
+  --space-8:  32px;    /* component spacing */
+  --space-10: 40px;
+  --space-12: 48px;    /* section spacing */
+  --space-16: 64px;    /* large section padding */
+  --space-20: 80px;
+  --space-24: 96px;    /* hero spacing */
+  --space-32: 128px;   /* desktop section spacing */
+
+  /* =========================================================
+     LAYOUT
+     ========================================================= */
+
+  --container-max:     1280px;
+  --container-large:   1440px;
+  --container-reading:  720px;
+  --container-cta:      900px;
+
+  /* Container Padding (responsive via class) */
+  --container-pad-desktop: var(--space-12);  /* 48px */
+  --container-pad-tablet:  var(--space-8);   /* 32px */
+  --container-pad-mobile:  var(--space-5);   /* 20px */
+  --container-pad-small:   var(--space-4);   /* 16px */
+
+  /* Section Vertical Padding */
+  --section-pad-y:      var(--space-24);     /* 96px desktop */
+  --section-pad-y-md:   var(--space-16);     /* 64px tablet */
+  --section-pad-y-sm:   var(--space-12);     /* 48px mobile */
+
+  /* Navigation */
+  --nav-height-desktop: 88px;
+  --nav-height-mobile:  72px;
+  --utility-bar-height: 40px;
+
+  /* =========================================================
+     BORDER RADIUS — From 04_Design_System.md
+     ========================================================= */
+
+  --radius-sm:     8px;
+  --radius-md:    12px;   /* buttons, forms */
+  --radius-lg:    16px;   /* cards */
+  --radius-xl:    24px;
+  --radius-round: 999px;  /* pills, circular */
+
+  /* Specific Component Radii */
+  --radius-btn:   var(--radius-md);   /* 12px */
+  --radius-card:  var(--radius-lg);   /* 16px */
+  --radius-input: var(--radius-md);   /* 12px */
+  --radius-image: 18px;
+
+  /* =========================================================
+     SHADOWS — From 03_Color_System.md & 04_Design_System.md
+     ========================================================= */
+
+  --shadow-sm:   0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md:   0 12px 30px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 24px 60px rgba(0, 0, 0, 0.12);
+
+  /* Card hover shadow */
+  --shadow-card-hover: 0 18px 40px rgba(0, 0, 0, 0.12);
+
+  /* Button shadow */
+  --shadow-btn:  0 4px 16px rgba(180, 100, 60, 0.25);
+
+  /* Floating button shadow */
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.18);
+
+  /* =========================================================
+     Z-INDEX SCALE — From architecture/CSS.md
+     ========================================================= */
+
+  --z-dropdown:        100;
+  --z-navbar:          200;
+  --z-floating:        300;
+  --z-drawer:          500;
+  --z-modal:           700;
+  --z-loader:          999;
+
+  /* =========================================================
+     TRANSITIONS — From architecture/CSS.md
+     ========================================================= */
+
+  --transition-fast:   150ms ease-out;
+  --transition-normal: 250ms ease-out;
+  --transition-slow:   400ms ease-out;
+
+  /* Component-specific transitions */
+  --transition-btn:    200ms ease-out;
+  --transition-nav:    250ms ease-out;
+  --transition-card:   300ms ease-out;
+
+  /* =========================================================
+     NAVIGATION SPECIFIC
+     ========================================================= */
+
+  --nav-bg-transparent: transparent;
+  --nav-bg-solid:       rgba(255, 255, 255, 0.97);
+  --nav-border:         rgba(0, 0, 0, 0.05);
+  --nav-blur:           blur(12px);
+  --nav-link-active:    var(--color-copper);
+  --nav-link-inactive:  var(--color-anthracite);
+
+  /* =========================================================
+     FORMS SPECIFIC
+     ========================================================= */
+
+  --form-input-bg:        var(--color-white);
+  --form-input-border:    var(--neutral-300);   /* #D9D6D1 */
+  --form-input-hover:     var(--neutral-400);   /* #BEB8AF */
+  --form-input-focus:     var(--color-copper);
+  --form-input-height:    52px;
+  --form-placeholder:     var(--color-concrete);
+  --form-label:           var(--color-anthracite);
+
+  /* =========================================================
+     ICON SYSTEM
+     ========================================================= */
+
+  --icon-size-sm:   16px;
+  --icon-size-md:   24px;   /* standard */
+  --icon-size-lg:   32px;   /* hero icons */
+  --icon-size-xl:   48px;   /* feature icons */
+  --icon-stroke:    2px;
+  --icon-color:     var(--color-concrete);
+  --icon-color-active: var(--color-copper);
+
+  /* =========================================================
+     FLOATING BUTTONS
+     ========================================================= */
+
+  --fab-size:      60px;
+  --fab-gap:       12px;
+  --fab-right:     24px;
+  --fab-bottom:    32px;
+
+  /* =========================================================
+     SCROLLBAR
+     ========================================================= */
+
+  --scrollbar-width:  6px;
+  --scrollbar-thumb:  var(--color-copper);
+  --scrollbar-track:  var(--neutral-200);
+
+  /* =========================================================
+     SELECTION
+     ========================================================= */
+
+  --selection-bg:   var(--color-copper);
+  --selection-text: var(--color-white);
+}

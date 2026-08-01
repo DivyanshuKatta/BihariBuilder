@@ -1,0 +1,376 @@
+/*
+ * forms.css
+ * Biharibuilder Design System — Form System
+ * Version: 1.0
+ *
+ * Covers: inputs, select, textarea, labels, validation states,
+ *         floating labels, and form layout utilities.
+ *
+ * Rules from design system:
+ *   - Input height: 52px
+ *   - Radius: 12px
+ *   - Focus border: Copper
+ *   - Floating labels
+ *   - Inline validation
+ */
+
+/* =========================================================
+   FORM WRAPPER
+   ========================================================= */
+
+.form {
+  width: 100%;
+}
+
+/* =========================================================
+   FORM GROUP — label + input wrapper
+   ========================================================= */
+
+.form-group {
+  position: relative;
+  margin-bottom: var(--space-6);  /* 24px */
+}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);       /* 14px */
+  font-weight: var(--weight-semibold);
+  color: var(--form-label);            /* anthracite */
+  margin-bottom: var(--space-2);       /* 8px */
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* Required indicator */
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-copper);
+  font-weight: var(--weight-bold);
+}
+
+/* =========================================================
+   BASE INPUT STYLES
+   ========================================================= */
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  height: var(--form-input-height);    /* 52px */
+  padding-inline: var(--space-4);      /* 16px */
+  padding-block: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--text-small);        /* 16px */
+  font-weight: var(--weight-regular);
+  color: var(--text-heading);
+
+  background-color: var(--form-input-bg);
+  border: 1.5px solid var(--form-input-border);
+  border-radius: var(--radius-input);  /* 12px */
+
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+
+  transition:
+    border-color  var(--transition-fast),
+    box-shadow    var(--transition-fast),
+    background    var(--transition-fast);
+}
+
+/* Placeholder */
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--form-placeholder);    /* concrete #8D8D83 */
+  font-weight: var(--weight-regular);
+}
+
+/* Hover */
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--form-input-hover);  /* #BEB8AF */
+}
+
+/* Focus */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--form-input-focus);  /* copper */
+  box-shadow: 0 0 0 3px rgba(180, 100, 60, 0.12);
+  background-color: #FEFEFE;
+}
+
+/* Disabled */
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+  background-color: var(--neutral-100);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.form-textarea {
+  height: auto;
+  min-height: 120px;
+  padding-block: var(--space-4);     /* 16px */
+  resize: vertical;
+  line-height: var(--leading-relaxed);
+}
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238D8D83' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 16px;
+  padding-right: var(--space-10);  /* 40px to avoid text under arrow */
+  cursor: pointer;
+}
+
+.form-select:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23B4643C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Select option */
+.form-select option {
+  background: var(--color-white);
+  color: var(--text-heading);
+  padding: var(--space-2);
+}
+
+/* =========================================================
+   VALIDATION STATES
+   ========================================================= */
+
+/* Error */
+.form-group--error .form-input,
+.form-group--error .form-select,
+.form-group--error .form-textarea {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(179, 58, 58, 0.1);
+}
+
+/* Success */
+.form-group--success .form-input,
+.form-group--success .form-select,
+.form-group--success .form-textarea {
+  border-color: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(60, 122, 74, 0.1);
+}
+
+/* Error message */
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--color-error);
+  font-weight: var(--weight-medium);
+}
+
+.form-error svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Success message */
+.form-success-msg {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--color-success);
+  font-weight: var(--weight-medium);
+}
+
+/* Helper text */
+.form-helper {
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+/* =========================================================
+   FORM ICON PREFIX / SUFFIX
+   ========================================================= */
+
+.form-group--icon-left .form-input,
+.form-group--icon-left .form-select {
+  padding-left: 48px;
+}
+
+.form-group--icon-right .form-input {
+  padding-right: 48px;
+}
+
+.form-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--color-concrete);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+/* Adjust for label offset */
+.form-group .form-icon {
+  top: calc(50% + 12px); /* center within input area below label */
+}
+
+.form-icon--left  { left: var(--space-4);  }
+.form-icon--right { right: var(--space-4); }
+
+.form-group--icon-left .form-input:focus ~ .form-icon--left,
+.form-group--icon-right .form-input:focus ~ .form-icon--right {
+  color: var(--color-copper);
+}
+
+/* =========================================================
+   ESTIMATE FORM CARD WRAPPER
+   White card containing the main contact form.
+   ========================================================= */
+
+.estimate-form-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);   /* 16px */
+  padding: var(--space-8);             /* 32px */
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 420px;
+}
+
+.estimate-form-card__header {
+  margin-bottom: var(--space-6);
+}
+
+.estimate-form-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-snug);
+}
+
+.estimate-form-card__subtitle {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* Form success state */
+.form-success-state {
+  display: none;
+  text-align: center;
+  padding: var(--space-12) var(--space-8);
+}
+
+.form-success-state.is-visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.form-success-state__icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(60, 122, 74, 0.1);
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-success);
+}
+
+.form-success-state__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-subheading);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+}
+
+.form-success-state__message {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+  max-width: 30ch;
+}
+
+/* =========================================================
+   CHECKBOX & RADIO
+   ========================================================= */
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.form-check__input {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--form-input-border);
+  border-radius: var(--radius-sm);
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--color-white);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: 2px;
+}
+
+.form-check__input:checked {
+  background: var(--color-copper);
+  border-color: var(--color-copper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px;
+}
+
+.form-check__input:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.form-check__label {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  line-height: var(--leading-normal);
+  cursor: pointer;
+}
+
+/* Radio variant */
+.form-check__input[type="radio"] {
+  border-radius: var(--radius-round);
+}
+
+.form-check__input[type="radio"]:checked {
+  background-image: none;
+  box-shadow: inset 0 0 0 4px var(--color-white);
+}

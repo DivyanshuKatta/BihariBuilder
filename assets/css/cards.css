@@ -1,0 +1,495 @@
+/*
+ * cards.css
+ * Biharibuilder Design System — Card System
+ * Version: 1.0
+ *
+ * All cards extend .card base.
+ * Variants: service, project, testimonial, blog, contact, gallery, technology
+ *
+ * Rules:
+ *   - White background
+ *   - 16px radius
+ *   - 32px padding
+ *   - Subtle border + shadow
+ *   - Hover: lift 6px, deeper shadow
+ *   - Always equal height (use flex column layout)
+ */
+
+/* =========================================================
+   BASE CARD
+   ========================================================= */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);      /* 16px */
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform   var(--transition-card),
+    box-shadow  var(--transition-card);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Card body (fills remaining space) */
+.card__body {
+  padding: var(--space-8);              /* 32px */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Card image */
+.card__image {
+  position: relative;
+  overflow: hidden;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease-out;
+}
+
+.card:hover .card__image img {
+  transform: scale(1.03);
+}
+
+/* Card footer — always pinned to bottom */
+.card__footer {
+  padding: var(--space-6) var(--space-8);
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+}
+
+/* Card label/tag */
+.card__label {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Card title */
+.card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-semibold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-3);
+}
+
+/* Card description */
+.card__description {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+  flex: 1;
+  margin-bottom: var(--space-6);
+}
+
+/* Card CTA link — ghost style arrow */
+.card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: var(--color-copper);
+  text-decoration: none;
+  margin-top: auto;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.card__cta:hover {
+  color: var(--color-copper-dark);
+  gap: var(--space-3);
+}
+
+.card__cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.card:hover .card__cta svg {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   SERVICE CARD
+   ========================================================= */
+
+.card-service .card__body {
+  padding: var(--space-8);
+  align-items: flex-start;
+}
+
+/* Icon wrapper */
+.card-service__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: rgba(180, 100, 60, 0.08);
+  color: var(--color-copper);
+  margin-bottom: var(--space-6);
+  flex-shrink: 0;
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+.card-service__icon svg {
+  width: var(--icon-size-xl);   /* 48px */
+  height: var(--icon-size-xl);
+}
+
+.card-service:hover .card-service__icon {
+  background: var(--color-copper);
+  color: var(--color-white);
+}
+
+/* =========================================================
+   PROJECT CARD
+   ========================================================= */
+
+.card-project {
+  cursor: pointer;
+}
+
+.card-project .card__image {
+  aspect-ratio: 16 / 9;
+}
+
+.card-project__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(47, 49, 51, 0.85) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-card);
+}
+
+.card-project:hover .card-project__overlay {
+  opacity: 1;
+}
+
+/* Status badge positioned over image */
+.card-project .status-badge {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 2;
+}
+
+/* Project meta row */
+.card-project__meta {
+  display: flex;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.card-project__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+.card-project__meta-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-copper);
+}
+
+/* =========================================================
+   TESTIMONIAL CARD
+   ========================================================= */
+
+.card-testimonial {
+  padding: var(--space-8);
+}
+
+.card-testimonial .card__body {
+  padding: 0;
+}
+
+/* Stars */
+.card-testimonial__stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: var(--space-4);
+}
+
+.card-testimonial__star {
+  color: #F5A623;
+  width: 18px;
+  height: 18px;
+}
+
+/* Quote text */
+.card-testimonial__quote {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  font-style: italic;
+  margin-bottom: var(--space-6);
+  flex: 1;
+}
+
+/* Quote mark */
+.card-testimonial__quote::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 0;
+  vertical-align: -0.6em;
+  color: var(--color-copper);
+  margin-right: 2px;
+}
+
+/* Client info */
+.card-testimonial__client {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-light);
+}
+
+.card-testimonial__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-round);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--border-light);
+}
+
+.card-testimonial__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: var(--text-heading);
+  display: block;
+}
+
+.card-testimonial__location {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   BLOG CARD
+   ========================================================= */
+
+.card-blog .card__image {
+  aspect-ratio: 16 / 9;
+}
+
+.card-blog__category {
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-2);
+}
+
+.card-blog__date {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card-blog__excerpt {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =========================================================
+   CONTACT CARD
+   ========================================================= */
+
+.card-contact {
+  padding: var(--space-8);
+  transition: transform var(--transition-card), box-shadow var(--transition-card);
+}
+
+.card-contact .card__body {
+  padding: 0;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.card-contact__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: rgba(180, 100, 60, 0.08);
+  color: var(--color-copper);
+  flex-shrink: 0;
+}
+
+.card-contact__icon-wrap svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-contact__info h4 {
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: var(--text-heading);
+  margin-bottom: var(--space-1);
+}
+
+.card-contact__info a,
+.card-contact__info p {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  line-height: var(--leading-normal);
+}
+
+.card-contact__info a:hover {
+  color: var(--color-copper);
+}
+
+/* =========================================================
+   GALLERY CARD
+   ========================================================= */
+
+.card-gallery {
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border-radius: var(--radius-image);  /* 18px */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-gallery .card__image {
+  aspect-ratio: 4 / 3;
+  height: 100%;
+}
+
+.card-gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(47, 49, 51, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.card-gallery:hover .card-gallery__overlay {
+  opacity: 1;
+}
+
+.card-gallery__zoom-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-round);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-anthracite);
+  transform: scale(0.8);
+  transition: transform var(--transition-normal);
+}
+
+.card-gallery:hover .card-gallery__zoom-icon {
+  transform: scale(1);
+}
+
+/* =========================================================
+   TECHNOLOGY CARD
+   ========================================================= */
+
+.card-technology {
+  border-left: 3px solid var(--color-copper);
+  padding: var(--space-8);
+}
+
+.card-technology .card__body {
+  padding: 0;
+}
+
+.card-technology__number {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: var(--weight-bold);
+  color: rgba(180, 100, 60, 0.12);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+  letter-spacing: var(--tracking-tight);
+  user-select: none;
+}
+
+/* =========================================================
+   TRUST BADGE CARD — Used below forms and in hero
+   ========================================================= */
+
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-round);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  color: var(--text-heading);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.trust-badge__icon {
+  color: var(--color-copper);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Trust badge group */
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}

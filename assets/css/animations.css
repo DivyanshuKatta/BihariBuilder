@@ -1,0 +1,258 @@
+/*
+ * animations.css
+ * Biharibuilder Design System — Animation & Motion System
+ * Version: 1.0
+ *
+ * Animations allowed (from 02_Brand_Guidelines.md):
+ *   Fade, Slide, Smooth Hover, Counter, Sticky Header, Accordion, Lightbox
+ *
+ * Animations NOT allowed:
+ *   Excessive parallax, flying elements, bounce animations, auto-playing carousels
+ *
+ * All animations respect prefers-reduced-motion.
+ * Duration: 250–400ms. Ease: ease-out.
+ */
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse animation — for floating buttons */
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(180, 100, 60, 0.5); }
+  50%  { box-shadow: 0 0 0 12px rgba(180, 100, 60, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(180, 100, 60, 0);    }
+}
+
+@keyframes pulseWhatsApp {
+  0%   { box-shadow: 0 0 0 0   rgba(37, 211, 102, 0.5); }
+  50%  { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);   }
+  100% { box-shadow: 0 0 0 0   rgba(37, 211, 102, 0);    }
+}
+
+/* Spinner */
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   SCROLL-TRIGGERED ANIMATION CLASSES
+   Applied via IntersectionObserver in animations.js
+   ========================================================= */
+
+/* Initial hidden states */
+[data-animation="fade-up"],
+[data-animation="fade-in"],
+[data-animation="slide-left"],
+[data-animation="slide-right"],
+[data-animation="scale-in"] {
+  opacity: 0;
+  transition:
+    opacity    400ms ease-out,
+    transform  400ms ease-out;
+  will-change: opacity, transform;
+}
+
+[data-animation="fade-up"]    { transform: translateY(24px); }
+[data-animation="slide-left"] { transform: translateX(-32px); }
+[data-animation="slide-right"]{ transform: translateX(32px); }
+[data-animation="scale-in"]   { transform: scale(0.93); }
+
+/* Animated in state */
+[data-animation].is-animated {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   350ms ease-out,
+    transform 350ms ease-out;
+}
+
+[data-stagger].is-animated > *:nth-child(1)  { transition-delay: 0ms;    opacity: 1; transform: none; }
+[data-stagger].is-animated > *:nth-child(2)  { transition-delay: 80ms;   opacity: 1; transform: none; }
+[data-stagger].is-animated > *:nth-child(3)  { transition-delay: 160ms;  opacity: 1; transform: none; }
+[data-stagger].is-animated > *:nth-child(4)  { transition-delay: 240ms;  opacity: 1; transform: none; }
+[data-stagger].is-animated > *:nth-child(5)  { transition-delay: 320ms;  opacity: 1; transform: none; }
+[data-stagger].is-animated > *:nth-child(6)  { transition-delay: 400ms;  opacity: 1; transform: none; }
+
+/* =========================================================
+   FLOATING ACTION BUTTONS — Pulse
+   ========================================================= */
+
+.fab--pulse {
+  animation: pulseWhatsApp 2s ease-out;
+}
+
+.fab--pulse-copper {
+  animation: pulse 2s ease-out;
+}
+
+/* =========================================================
+   ACCORDION ANIMATION
+   ========================================================= */
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 350ms ease-out, padding 350ms ease-out;
+}
+
+.accordion__content.is-open {
+  max-height: 600px; /* safe max that won't cut off content */
+}
+
+/* Chevron rotation */
+.accordion__chevron {
+  transition: transform 300ms ease-out;
+  flex-shrink: 0;
+}
+
+.accordion__item.is-open .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   HERO SECTION ENTRY ANIMATION
+   ========================================================= */
+
+.hero__content {
+  animation: fadeInUp 700ms ease-out both;
+}
+
+.hero__form-wrapper {
+  animation: fadeInUp 700ms 200ms ease-out both;
+}
+
+.hero__badges {
+  animation: fadeInUp 700ms 400ms ease-out both;
+}
+
+/* =========================================================
+   PAGE TRANSITION OVERLAY
+   ========================================================= */
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--color-anthracite);
+  z-index: var(--z-loader);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+/* =========================================================
+   LIGHTBOX ANIMATION
+   ========================================================= */
+
+.lightbox {
+  animation: fadeIn 250ms ease-out;
+}
+
+.lightbox__image {
+  animation: scaleIn 300ms ease-out;
+}
+
+/* =========================================================
+   TOOLTIP / POPOVER
+   ========================================================= */
+
+.tooltip {
+  animation: fadeInUp 200ms ease-out;
+}
+
+/* =========================================================
+   REDUCED MOTION OVERRIDE
+   All animations respect this media query (also handled in reset.css)
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  [data-animation],
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .hero__content,
+  .hero__form-wrapper,
+  .hero__badges {
+    animation: none;
+  }
+
+  .accordion__content {
+    transition: none;
+  }
+
+  .fab--pulse,
+  .fab--pulse-copper {
+    animation: none;
+  }
+}

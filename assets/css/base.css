@@ -1,0 +1,142 @@
+/*
+ * base.css
+ * Biharibuilder Design System — Base Styles
+ * Version: 1.0
+ *
+ * Foundation styles applied to HTML elements globally.
+ * Implements brand colors, typography, and baseline behaviors.
+ */
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   TYPOGRAPHY BASE
+   ========================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+p {
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  max-width: 70ch; /* optimal reading width */
+}
+
+/* Allow paragraphs inside containers to fill full width */
+.container p,
+.card p,
+section p {
+  max-width: 65ch;
+}
+
+a {
+  color: var(--text-link);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--text-link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+strong, b {
+  font-weight: var(--weight-semibold);
+  color: var(--text-heading);
+}
+
+em, i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   FOCUS STYLES — Accessible, copper outline
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* =========================================================
+   SECTION BASE
+   ========================================================= */
+
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+
+img {
+  object-fit: cover;
+}
+
+/* =========================================================
+   SVG ICONS — Lucide style
+   ========================================================= */
+
+svg {
+  stroke-width: var(--icon-stroke);
+  fill: none;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   HORIZONTAL RULE
+   ========================================================= */
+
+hr {
+  border-color: var(--border-light);
+  margin-block: var(--space-8);
+}
+
+/* =========================================================
+   PRINT — Hide non-essential UI
+   ========================================================= */
+
+@media print {
+  .site-header,
+  .site-footer,
+  .fab-container,
+  .mobile-drawer,
+  .drawer-overlay {
+    display: none !important;
+  }
+}

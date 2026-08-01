@@ -1,0 +1,261 @@
+/*
+ * layout.css
+ * Biharibuilder Design System — Layout System
+ * Version: 1.0
+ *
+ * Container, grid, section, and structural layout patterns.
+ * Mobile-first. 12-column grid on desktop.
+ */
+
+/* =========================================================
+   CONTAINER
+   Max: 1280px. Responsive horizontal padding.
+   ========================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);   /* 1280px */
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile); /* 20px base */
+}
+
+@media (min-width: 576px) {
+  .container {
+    padding-inline: var(--space-8); /* 32px */
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--container-pad-tablet); /* 32px */
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding-inline: var(--container-pad-desktop); /* 48px */
+  }
+}
+
+/* Container variants */
+.container--wide {
+  max-width: var(--container-large);  /* 1440px */
+}
+
+.container--narrow {
+  max-width: var(--container-reading); /* 720px */
+}
+
+.container--cta {
+  max-width: var(--container-cta);    /* 900px */
+}
+
+/* =========================================================
+   SECTION
+   Standard vertical padding for all page sections.
+   ========================================================= */
+
+.section {
+  padding-block: var(--section-pad-y-sm); /* 48px mobile */
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--section-pad-y-md); /* 64px tablet */
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    padding-block: var(--section-pad-y); /* 96px desktop */
+  }
+}
+
+/* Section background variants */
+.section--white    { background-color: var(--bg-section-light); }
+.section--offwhite { background-color: var(--bg-page);          }
+.section--sand     { background-color: var(--bg-section-alt);   }
+.section--dark     { background-color: var(--bg-dark);          }
+.section--footer   { background-color: var(--bg-footer);        }
+
+/* =========================================================
+   GRID SYSTEM
+   12-column desktop, 8-column tablet, 4-column mobile
+   ========================================================= */
+
+/* Flex grid rows */
+.grid {
+  display: grid;
+  gap: var(--space-6); /* 24px gap */
+}
+
+/* Auto-fit responsive grids */
+.grid-auto-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-auto-md {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.grid-auto-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--space-6);
+}
+
+/* Fixed column grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-6);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-6);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-6);
+}
+
+@media (min-width: 576px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* =========================================================
+   FLEX UTILITIES
+   ========================================================= */
+
+.flex         { display: flex; }
+.flex-col     { display: flex; flex-direction: column; }
+.flex-wrap    { flex-wrap: wrap; }
+.flex-nowrap  { flex-wrap: nowrap; }
+
+/* Justify */
+.justify-start   { justify-content: flex-start;    }
+.justify-end     { justify-content: flex-end;      }
+.justify-center  { justify-content: center;        }
+.justify-between { justify-content: space-between; }
+.justify-around  { justify-content: space-around;  }
+.justify-evenly  { justify-content: space-evenly;  }
+
+/* Align */
+.align-start   { align-items: flex-start; }
+.align-end     { align-items: flex-end;   }
+.align-center  { align-items: center;     }
+.align-stretch { align-items: stretch;    }
+.align-baseline{ align-items: baseline;   }
+
+/* Flex child helpers */
+.flex-1    { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-none { flex: none; }
+.shrink-0  { flex-shrink: 0; }
+
+/* =========================================================
+   CLUSTER — Inline group of items with gap
+   ========================================================= */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* =========================================================
+   STACK — Vertical stack with spacing
+   ========================================================= */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack > * + * { margin-top: var(--space-4); }
+.stack--sm > * + * { margin-top: var(--space-2); }
+.stack--lg > * + * { margin-top: var(--space-8); }
+
+/* =========================================================
+   CENTER — Centered content block
+   ========================================================= */
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-text {
+  text-align: center;
+  margin-inline: auto;
+}
+
+/* =========================================================
+   TWO-COLUMN SPLIT LAYOUT
+   Used for hero, about, features
+   ========================================================= */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split--60-40 {
+    grid-template-columns: 60fr 40fr;
+  }
+
+  .split--55-45 {
+    grid-template-columns: 55fr 45fr;
+  }
+
+  /* Reverse on desktop */
+  .split--reverse-desktop .split__secondary {
+    order: -1;
+  }
+}
+
+/* =========================================================
+   ASPECT RATIO HELPERS
+   ========================================================= */
+
+.ratio-16-9  { aspect-ratio: 16 / 9;  }
+.ratio-4-3   { aspect-ratio: 4  / 3;  }
+.ratio-1-1   { aspect-ratio: 1  / 1;  }
+.ratio-3-4   { aspect-ratio: 3  / 4;  }
+
+/* =========================================================
+   STICKY HEADER OFFSET
+   Account for sticky navbar height when using scroll anchors
+   ========================================================= */
+
+:target {
+  scroll-margin-top: calc(var(--nav-height-desktop) + var(--utility-bar-height) + var(--space-4));
+}

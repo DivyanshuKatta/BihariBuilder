@@ -1,0 +1,58 @@
+/*
+ * style.css
+ * Biharibuilder Design System — Master CSS Entry Point
+ * Version: 1.0
+ *
+ * Import order follows CSS Architecture specification (architecture/CSS.md):
+ *   1. variables.css  — design tokens
+ *   2. reset.css      — browser normalization
+ *   3. base.css       — global element styles
+ *   4. typography.css — type scale and text utilities
+ *   5. layout.css     — container, grid, flex, section
+ *   6. utilities.css  — single-purpose utility classes
+ *   7. buttons.css    — button system
+ *   8. forms.css      — form system
+ *   9. cards.css      — card system
+ *  10. navigation.css — navbar, drawer
+ *  11. footer.css     — footer component
+ *  12. components.css — FAB, timeline, accordion, CTA, etc.
+ *  13. animations.css — keyframes and scroll animations
+ *  14. responsive.css — responsive overrides (mobile-first)
+ *
+ * RULES:
+ *   - Never import page-specific styles here
+ *   - Never use @import for production (include via <link> in HTML)
+ *   - This file documents the correct <link> order for HTML pages
+ *
+ * HTML <head> include order:
+ *   <link rel="stylesheet" href="/assets/css/variables.css">
+ *   <link rel="stylesheet" href="/assets/css/reset.css">
+ *   <link rel="stylesheet" href="/assets/css/base.css">
+ *   <link rel="stylesheet" href="/assets/css/typography.css">
+ *   <link rel="stylesheet" href="/assets/css/layout.css">
+ *   <link rel="stylesheet" href="/assets/css/utilities.css">
+ *   <link rel="stylesheet" href="/assets/css/buttons.css">
+ *   <link rel="stylesheet" href="/assets/css/forms.css">
+ *   <link rel="stylesheet" href="/assets/css/cards.css">
+ *   <link rel="stylesheet" href="/assets/css/navigation.css">
+ *   <link rel="stylesheet" href="/assets/css/footer.css">
+ *   <link rel="stylesheet" href="/assets/css/components.css">
+ *   <link rel="stylesheet" href="/assets/css/animations.css">
+ *   <link rel="stylesheet" href="/assets/css/responsive.css">
+ *   (page-specific CSS last, e.g. /assets/css/pages/home.css)
+ */
+
+@import url('./variables.css');
+@import url('./reset.css');
+@import url('./base.css');
+@import url('./typography.css');
+@import url('./layout.css');
+@import url('./utilities.css');
+@import url('./buttons.css');
+@import url('./forms.css');
+@import url('./cards.css');
+@import url('./navigation.css');
+@import url('./footer.css');
+@import url('./components.css');
+@import url('./animations.css');
+@import url('./responsive.css');
