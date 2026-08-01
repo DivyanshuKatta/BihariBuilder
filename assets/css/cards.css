@@ -216,11 +216,28 @@
    ========================================================= */
 
 .card-project {
-  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.card-project .card__image {
-  aspect-ratio: 16 / 9;
+.card-project__image-wrap {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--neutral-200);
+}
+
+.card-project__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.card-project:hover .card-project__image {
+  transform: scale(1.06);
 }
 
 .card-project__overlay {
@@ -228,18 +245,18 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(47, 49, 51, 0.85) 0%,
+    rgba(47, 49, 51, 0.4) 0%,
     transparent 60%
   );
   opacity: 0;
-  transition: opacity var(--transition-card);
+  transition: opacity var(--transition-normal);
 }
 
 .card-project:hover .card-project__overlay {
   opacity: 1;
 }
 
-/* Status badge positioned over image */
+/* Status badge positioned over image top-left */
 .card-project .status-badge {
   position: absolute;
   top: var(--space-4);
@@ -247,11 +264,19 @@
   z-index: 2;
 }
 
+.card-project__body {
+  padding: var(--space-6) var(--space-8) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 /* Project meta row */
 .card-project__meta {
   display: flex;
-  gap: var(--space-6);
-  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .card-project__meta-item {
@@ -260,12 +285,35 @@
   gap: var(--space-2);
   font-size: var(--text-caption);
   color: var(--text-muted);
+  font-weight: var(--weight-medium);
 }
 
 .card-project__meta-item svg {
   width: 14px;
   height: 14px;
   color: var(--color-copper);
+}
+
+.card-project__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.card-project__text {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+  flex: 1;
+}
+
+.card-project__link {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* =========================================================
