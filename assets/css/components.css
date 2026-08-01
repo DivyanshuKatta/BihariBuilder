@@ -743,3 +743,190 @@
   font-size: var(--text-small);
   color: var(--text-muted);
 }
+
+/* =========================================================
+   HERO SECTION & ESTIMATE CARD
+   ========================================================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-height-desktop) + var(--utility-bar-height) + var(--space-8));
+  padding-bottom: var(--space-16);
+  background-color: var(--color-anthracite);
+  overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-height-mobile) + var(--space-8));
+    padding-bottom: var(--space-12);
+  }
+}
+
+/* Hero Background Picture */
+.hero__bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay 40% dark tint */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay); /* rgba(0, 0, 0, 0.40) */
+  z-index: 1;
+}
+
+/* Watermark Logo (subtle 5% opacity, top right) */
+.hero__watermark {
+  position: absolute;
+  top: 8%;
+  right: 4%;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  max-width: 480px;
+  width: 35vw;
+  opacity: 0.05;
+}
+
+.hero__watermark-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* Hero Inner Layout */
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .hero__inner {
+    grid-template-columns: 55fr 45fr;
+    gap: var(--space-10);
+  }
+}
+
+/* Hero Content Column */
+.hero__content {
+  color: var(--color-white);
+}
+
+.hero__label {
+  color: var(--color-copper-light);
+  margin-bottom: var(--space-4);
+}
+
+.hero__label::before {
+  background: var(--color-copper-light);
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-bold);
+  color: var(--color-white);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-4);
+  max-width: 16ch;
+}
+
+.hero__lead {
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
+  font-weight: var(--weight-medium);
+  color: var(--color-white);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-2);
+}
+
+.hero__subtext {
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+  max-width: 48ch;
+}
+
+.hero__ctas {
+  margin-bottom: var(--space-8);
+}
+
+/* Hero Form Column */
+.hero__form-col {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .hero__form-col {
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+}
+
+/* Estimate Form Card — max-width min(420px, 100%) */
+.estimate-card {
+  width: 100%;
+  max-width: min(420px, 100%);
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+}
+
+@media (max-width: 575px) {
+  .estimate-card {
+    padding: var(--space-6);
+  }
+}
+
+.estimate-card__header {
+  margin-bottom: var(--space-6);
+}
+
+.estimate-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.estimate-card__subtitle {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* Trust Badges in Hero */
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
