@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <g fill="none">
+    <!-- Architectural Roof Emblem -->
+    <path d="M10 42 L28 14 L46 42 Z" stroke="#B4643C" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
+    <path d="M20 42 L28 28 L36 42 Z" fill="#B4643C"/>
+    <!-- Typography -->
+    <text x="56" y="38" font-family="'Manrope', sans-serif" font-size="24" font-weight="800" fill="#2F3133" letter-spacing="-0.5">Bihari<tspan fill="#B4643C">builder</tspan></text>
+  </g>
+</svg>
