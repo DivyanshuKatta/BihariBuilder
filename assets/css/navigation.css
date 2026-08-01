@@ -22,8 +22,10 @@
 .utility-bar {
   display: none;   /* hidden on mobile */
   height: var(--utility-bar-height);  /* 40px */
+  max-height: 40px;
   background-color: var(--color-anthracite);
   z-index: calc(var(--z-navbar) + 1);
+  transition: max-height var(--transition-fast), opacity var(--transition-fast);
 }
 
 .utility-bar__inner {
@@ -80,25 +82,26 @@
   left: 0;
   right: 0;
   z-index: var(--z-navbar);
+  background-color: rgba(31, 33, 35, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition:
     background-color var(--transition-nav),
     backdrop-filter  var(--transition-nav),
     box-shadow       var(--transition-nav);
 }
 
-/* When utility bar is visible, navbar sits below it */
 .site-header--with-bar {
-  top: var(--utility-bar-height);
+  top: 0;
 }
 
-/* Transparent state (over hero) */
-.site-header {
-  background-color: var(--nav-bg-transparent);
-  backdrop-filter: none;
-  box-shadow: none;
+/* When scrolled — collapse utility bar and transition header to solid white */
+.site-header.is-scrolled .utility-bar {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 }
 
-/* Scrolled state — white with blur */
 .site-header.is-scrolled {
   background-color: var(--nav-bg-solid);
   backdrop-filter: var(--nav-blur);
