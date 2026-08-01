@@ -1012,6 +1012,31 @@
 }
 
 /* =========================================================
+   SERVICES PREVIEW GRID & FEATURED PROJECTS GRID
+   ========================================================= */
+
+.services-preview__grid,
+.projects-preview__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .services-preview__grid,
+  .projects-preview__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .services-preview__grid,
+  .projects-preview__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================
    WHY BIHARIBUILDER SECTION & STATS CARDS
    ========================================================= */
 

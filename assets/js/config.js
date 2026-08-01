@@ -19,7 +19,7 @@ const CONFIG = Object.freeze({
      ========================================================= */
 
   phone: {
-    display: '+91 XXX XXX XXXX',      // Shown in UI
+    display: '+91 62072 59294',      // Shown in UI
     link:    'tel:+91XXXXXXXXXX',      // href value
     whatsapp: 'https://wa.me/91XXXXXXXXXX', // WhatsApp deep link
     whatsappMessage: 'Hello, I am interested in a free construction estimate.',

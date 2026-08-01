@@ -224,18 +224,14 @@
 
 .form-icon {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: auto;
+  bottom: 16px;
+  transform: none;
   width: 20px;
   height: 20px;
   color: var(--color-concrete);
   pointer-events: none;
   transition: color var(--transition-fast);
-}
-
-/* Adjust for label offset */
-.form-group .form-icon {
-  top: calc(50% + 12px); /* center within input area below label */
 }
 
 .form-icon--left  { left: var(--space-4);  }
