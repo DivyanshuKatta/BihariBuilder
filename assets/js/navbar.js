@@ -60,15 +60,18 @@ const Navbar = (() => {
      ------------------------------------------------------- */
 
   function setActiveLink() {
-    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
-    const links = document.querySelectorAll('.navbar__nav-link, .drawer__nav-link');
+    const rawPath  = window.location.pathname;
+    const pageName = rawPath.split('/').filter(Boolean).pop() || 'index.html';
+    const links    = document.querySelectorAll('.navbar__nav-link, .drawer__nav-link');
 
     links.forEach(link => {
-      const linkPath = link.getAttribute('href')?.replace(/\/+$/, '') || '';
-      const isHome   = (currentPath === '/' || currentPath.endsWith('/index.html'));
+      const linkHref = link.getAttribute('href') || '';
+      const linkPage = linkHref.split('/').filter(Boolean).pop() || 'index.html';
+
+      const isHome   = (pageName === 'index.html' || pageName === 'BihariBuilders');
       const isActive = isHome
-        ? (linkPath === '/' || linkPath === '/index.html' || linkPath === 'index.html')
-        : currentPath.includes(linkPath) && linkPath !== '/' && linkPath !== '';
+        ? (linkPage === 'index.html' || linkHref === './' || linkHref === '/' || linkHref === '#')
+        : (pageName.includes(linkPage) && linkPage !== 'index.html');
 
       link.classList.toggle('is-active', isActive);
       link.setAttribute('aria-current', isActive ? 'page' : 'false');

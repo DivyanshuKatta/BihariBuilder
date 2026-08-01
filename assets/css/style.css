@@ -25,21 +25,20 @@
  *   - This file documents the correct <link> order for HTML pages
  *
  * HTML <head> include order:
- *   <link rel="stylesheet" href="/assets/css/variables.css">
- *   <link rel="stylesheet" href="/assets/css/reset.css">
- *   <link rel="stylesheet" href="/assets/css/base.css">
- *   <link rel="stylesheet" href="/assets/css/typography.css">
- *   <link rel="stylesheet" href="/assets/css/layout.css">
- *   <link rel="stylesheet" href="/assets/css/utilities.css">
- *   <link rel="stylesheet" href="/assets/css/buttons.css">
- *   <link rel="stylesheet" href="/assets/css/forms.css">
- *   <link rel="stylesheet" href="/assets/css/cards.css">
- *   <link rel="stylesheet" href="/assets/css/navigation.css">
- *   <link rel="stylesheet" href="/assets/css/footer.css">
- *   <link rel="stylesheet" href="/assets/css/components.css">
- *   <link rel="stylesheet" href="/assets/css/animations.css">
- *   <link rel="stylesheet" href="/assets/css/responsive.css">
- *   (page-specific CSS last, e.g. /assets/css/pages/home.css)
+ *   <link rel="stylesheet" href="./assets/css/variables.css">
+ *   <link rel="stylesheet" href="./assets/css/reset.css">
+ *   <link rel="stylesheet" href="./assets/css/base.css">
+ *   <link rel="stylesheet" href="./assets/css/typography.css">
+ *   <link rel="stylesheet" href="./assets/css/layout.css">
+ *   <link rel="stylesheet" href="./assets/css/utilities.css">
+ *   <link rel="stylesheet" href="./assets/css/buttons.css">
+ *   <link rel="stylesheet" href="./assets/css/forms.css">
+ *   <link rel="stylesheet" href="./assets/css/cards.css">
+ *   <link rel="stylesheet" href="./assets/css/navigation.css">
+ *   <link rel="stylesheet" href="./assets/css/footer.css">
+ *   <link rel="stylesheet" href="./assets/css/components.css">
+ *   <link rel="stylesheet" href="./assets/css/animations.css">
+ *   <link rel="stylesheet" href="./assets/css/responsive.css">
  */
 
 @import url('./variables.css');
