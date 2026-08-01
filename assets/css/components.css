@@ -932,6 +932,86 @@
 }
 
 /* =========================================================
+   TRUST FEATURES SECTION & CARDS
+   ========================================================= */
+
+.trust-features {
+  position: relative;
+  background-color: var(--bg-section-alt); /* Sand background */
+}
+
+.trust-features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .trust-features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .trust-features__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.trust-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.trust-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-copper-light);
+}
+
+.trust-card__icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(180, 100, 60, 0.08);
+  color: var(--color-copper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-6);
+  flex-shrink: 0;
+  transition: background var(--transition-normal), color var(--transition-normal);
+}
+
+.trust-card:hover .trust-card__icon-wrap {
+  background: var(--color-copper);
+  color: var(--color-white);
+}
+
+.trust-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-3);
+}
+
+.trust-card__text {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* =========================================================
    WHY BIHARIBUILDER SECTION & STATS CARDS
    ========================================================= */
 
@@ -1071,7 +1151,7 @@
   .timeline::before {
     content: '';
     position: absolute;
-    top: 38px;
+    top: 28px;
     left: 60px;
     right: 60px;
     height: 3px;
