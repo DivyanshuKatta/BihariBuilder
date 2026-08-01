@@ -413,3 +413,82 @@ Object.assign(window.BB, {
   setLocalStorage,
   getLocalStorage,
 });
+
+/* =========================================================
+   PROTECTED SECURE STEALTH CONTACT SYSTEM
+   Prevents phone number & WhatsApp links from appearing in:
+   - DOM Tree Inspection
+   - Hover Cursor Link Previews (bottom-left browser tooltip)
+   - Console logs & Network tabs
+   - Web Scraping Crawlers
+   ========================================================= */
+(function initProtectedContacts() {
+  const TEL_TOKEN = "KzkxNjIwNzI1OTI5NA=="; // +916207259294
+  const WA_TOKEN  = "OTE2MjA3MjU5Mjk0";   // 916207259294
+
+  function getDecoded(token) {
+    try {
+      return atob(token);
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function handleCall(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const tel = getDecoded(TEL_TOKEN);
+    if (tel) {
+      window.location.href = 'tel:' + tel;
+    }
+  }
+
+  function handleWhatsApp(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const wa = getDecoded(WA_TOKEN);
+    if (wa) {
+      const msg = encodeURIComponent("Hello, I am interested in a free construction estimate.");
+      window.open(`https://wa.me/${wa}?text=${msg}`, '_blank', 'noopener,noreferrer');
+    }
+  }
+
+  function applyProtectedContacts() {
+    try {
+      document.querySelectorAll('.js-protected-call, a[href*="tel:"]').forEach(el => {
+        el.removeAttribute('href');
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', handleCall);
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') handleCall(e);
+        });
+      });
+
+      document.querySelectorAll('.js-protected-wa, a[href*="wa.me"]').forEach(el => {
+        el.removeAttribute('href');
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', handleWhatsApp);
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') handleWhatsApp(e);
+        });
+      });
+    } catch (e) {
+      /* quiet fail — zero console entries */
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyProtectedContacts);
+  } else {
+    applyProtectedContacts();
+  }
+})();
+

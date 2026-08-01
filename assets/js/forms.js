@@ -81,7 +81,7 @@ const Forms = (() => {
       // Log in dev only
       if (window.location.hostname === 'localhost' ||
           window.location.hostname === '127.0.0.1') {
-        console.error('[BB Forms]', err);
+        /* quiet log */
       }
 
     } finally {
@@ -103,7 +103,7 @@ const Forms = (() => {
       // Google Forms URL not configured yet — simulate success in dev
       if (window.location.hostname === 'localhost' ||
           window.location.hostname === '127.0.0.1') {
-        console.info('[BB Forms] Google Forms URL not configured. Simulating success.');
+        /* quiet log */
         await new Promise(r => setTimeout(r, 1500)); // simulate delay
         return;
       }

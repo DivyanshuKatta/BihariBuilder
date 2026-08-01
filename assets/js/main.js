@@ -140,7 +140,7 @@ function hidePageLoader() {
 
 window.addEventListener('error', (e) => {
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    console.error('[BB Error]', e.message, e.filename, e.lineno);
+    /* quiet log */
   }
   return false;
 });
