@@ -416,15 +416,16 @@ Object.assign(window.BB, {
 
 /* =========================================================
    PROTECTED SECURE STEALTH CONTACT SYSTEM
-   Prevents phone number & WhatsApp links from appearing in:
+   Prevents phone, email, & WhatsApp links from appearing in:
    - DOM Tree Inspection
    - Hover Cursor Link Previews (bottom-left browser tooltip)
    - Console logs & Network tabs
    - Web Scraping Crawlers
    ========================================================= */
 (function initProtectedContacts() {
-  const TEL_TOKEN = "KzkxNjIwNzI1OTI5NA=="; // +916207259294
-  const WA_TOKEN  = "OTE2MjA3MjU5Mjk0";   // 916207259294
+  const TEL_TOKEN   = "KzkxNjIwNzI1OTI5NA==";        // Phone token
+  const WA_TOKEN    = "OTE2MjA3MjU5Mjk0";          // WhatsApp token
+  const EMAIL_TOKEN = "aW5mb0BiaWhhcmlidWlsZGVyLmNvbQ=="; // Email: info@biharibuilder.com
 
   function getDecoded(token) {
     try {
@@ -457,6 +458,17 @@ Object.assign(window.BB, {
     }
   }
 
+  function handleEmail(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const mail = getDecoded(EMAIL_TOKEN);
+    if (mail) {
+      window.location.href = 'mailto:' + mail;
+    }
+  }
+
   function applyProtectedContacts() {
     try {
       document.querySelectorAll('.js-protected-call, a[href*="tel:"]').forEach(el => {
@@ -478,6 +490,17 @@ Object.assign(window.BB, {
         el.addEventListener('click', handleWhatsApp);
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') handleWhatsApp(e);
+        });
+      });
+
+      document.querySelectorAll('.js-protected-email, a[href*="mailto:"]').forEach(el => {
+        el.removeAttribute('href');
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', handleEmail);
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') handleEmail(e);
         });
       });
     } catch (e) {
