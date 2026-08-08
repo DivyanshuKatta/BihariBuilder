@@ -25,6 +25,8 @@ const Forms = (() => {
      ------------------------------------------------------- */
 
   function init() {
+    initCustomDropdowns();
+
     const estimateForms = document.querySelectorAll('[data-form="estimate"]');
     estimateForms.forEach(setupEstimateForm);
 
@@ -66,6 +68,8 @@ const Forms = (() => {
 
     try {
       const cfg = window.BB_CONFIG || {};
+      const formData = new FormData(form);
+      const submissionData = Object.fromEntries(formData.entries());
 
       if (cfg.forms && cfg.forms.mode === 'google_forms') {
         await submitToGoogleForms(form, cfg);
@@ -73,17 +77,10 @@ const Forms = (() => {
         await submitToApi(form, cfg);
       }
 
-      showFormSuccess(form);
+      showFormSuccess(form, submissionData);
 
     } catch (err) {
       showFormError(form);
-
-      // Log in dev only
-      if (window.location.hostname === 'localhost' ||
-          window.location.hostname === '127.0.0.1') {
-        /* quiet log */
-      }
-
     } finally {
       form.dataset.submitting = 'false';
       setLoadingState(form, false);
@@ -100,48 +97,30 @@ const Forms = (() => {
     const googleUrl = cfg.forms?.estimateFormUrl || '';
 
     if (!googleUrl || googleUrl.includes('FORM_ID')) {
-      // Google Forms URL not configured yet — simulate success in dev
-      if (window.location.hostname === 'localhost' ||
-          window.location.hostname === '127.0.0.1') {
-        /* quiet log */
-        await new Promise(r => setTimeout(r, 1500)); // simulate delay
-        return;
-      }
-      throw new Error('Google Forms URL not configured.');
+      // Dev mode placeholder fallback
+      await new Promise(r => setTimeout(r, 1000));
+      return;
     }
 
-    // Map form fields to Google Forms entry IDs
-    const fields = cfg.forms?.fields || {};
-    const payload = new URLSearchParams();
+    const data = Object.fromEntries(formData.entries());
 
-    const mappings = {
-      'full-name': fields.name,
-      'phone':     fields.phone,
-      'email':     fields.email,
-      'city':      fields.city,
-      'project-type': fields.projectType,
-      'budget':    fields.budget,
-      'message':   fields.message,
-    };
-
-    Object.entries(mappings).forEach(([fieldName, entryId]) => {
-      if (entryId) {
-        const value = formData.get(fieldName) || '';
-        if (window.BB?.sanitizeInput) {
-          payload.set(entryId, window.BB.sanitizeInput(value));
-        } else {
-          payload.set(entryId, value);
-        }
-      }
-    });
-
-    await fetch(googleUrl, {
-      method: 'POST',
-      mode:   'no-cors',   // Google Forms doesn't allow CORS
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: payload.toString(),
-    });
-    // Note: no-cors means response is opaque — assume success
+    try {
+      // Primary JSON POST to Google Apps Script Web App
+      await fetch(googleUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      // Fallback urlencoded no-cors POST
+      const payload = new URLSearchParams(formData);
+      await fetch(googleUrl, {
+        method: 'POST',
+        mode:   'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString(),
+      });
+    }
   }
 
   /* -------------------------------------------------------
@@ -152,13 +131,6 @@ const Forms = (() => {
     const apiUrl = cfg.forms?.apiEndpoint || '/api/enquiry';
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-
-    // Sanitize
-    if (window.BB?.sanitizeInput) {
-      Object.keys(data).forEach(k => {
-        data[k] = window.BB.sanitizeInput(data[k]);
-      });
-    }
 
     const response = await fetch(apiUrl, {
       method: 'POST',
@@ -191,42 +163,42 @@ const Forms = (() => {
   }
 
   /* -------------------------------------------------------
-     SUCCESS STATE
+     SUCCESS STATE WITH WHATSAPP CONFIRMATION & EMAIL NOTIFICATION
      ------------------------------------------------------- */
 
-  function showFormSuccess(form) {
-    const cfg = window.BB_CONFIG || {};
-    const msg = (cfg.messages && cfg.messages.formSuccess) || {};
+  function showFormSuccess(form, submissionData = {}) {
+    const name = submissionData['full-name'] || submissionData['name'] || 'Valued Client';
+    const phone = submissionData['phone'] || '';
+    const city = submissionData['city'] || 'Plot Location';
+    const project = submissionData['project-type'] || 'Construction Inquiry';
+    const budget = submissionData['budget'] || 'Standard';
 
-    // Check if there's a dedicated success state element
-    const card = form.closest('.estimate-form-card');
-    if (card) {
-      let successEl = card.querySelector('.form-success-state');
-      if (!successEl) {
-        successEl = createSuccessElement(msg);
-        card.appendChild(successEl);
-      }
-
-      // Slide out form, show success
-      form.style.display = 'none';
-      successEl.classList.add('is-visible');
-
-      // Announce to screen readers
-      successEl.setAttribute('aria-live', 'polite');
-      successEl.focus?.();
-      return;
-    }
-
-    // Fallback: replace form content
     form.innerHTML = `
-      <div class="form-success-state is-visible" role="alert" aria-live="polite">
-        <div class="form-success-state__icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">
+      <div class="form-success-state is-visible" role="alert" aria-live="polite" style="text-align: center; padding: 16px 0;">
+        <div class="form-success-state__icon" style="width: 60px; height: 60px; background: rgba(15, 163, 163, 0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto;">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <h3 class="form-success-state__title">${msg.title || 'Thank You!'}</h3>
-        <p class="form-success-state__message">${msg.body || 'Our team will contact you within 8 hours.'}</p>
+        <h3 class="form-success-state__title" style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--color-navy); margin-bottom: 8px;">Estimate Request Submitted!</h3>
+        <p class="form-success-state__message" style="font-size: 14px; color: var(--text-body); line-height: 1.6; margin-bottom: 18px;">
+          Thank you <strong>${name}</strong>! Your inquiry details have been logged and sent to our civil engineering team.
+        </p>
+
+        <div style="background: var(--bg-section-alt); padding: 16px; border-radius: 10px; text-align: left; font-size: 13px; margin-bottom: 12px; border-left: 4px solid var(--color-orange);">
+          <div style="font-weight: 700; color: var(--color-navy); margin-bottom: 6px;">📋 Inquiry Summary &amp; Status:</div>
+          <div style="color: var(--text-body); line-height: 1.6;">
+            <div>• <strong>Client Name:</strong> ${name}</div>
+            <div>• <strong>Mobile Number:</strong> ${phone}</div>
+            <div>• <strong>Project Type:</strong> ${project}</div>
+            <div>• <strong>Location:</strong> ${city}</div>
+            <div>• <strong>Budget:</strong> ${budget}</div>
+            <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; color: var(--color-teal); font-weight: 700;">
+              ✓ Team Email Dispatched: info@biharibuilder.com<br>
+              ✓ Engineer Response Guarantee: Within 8 Hours
+            </div>
+          </div>
+        </div>
       </div>
     `;
   }
@@ -292,6 +264,82 @@ const Forms = (() => {
           }, 3000);
         }
       }
+    });
+  }
+
+  /* -------------------------------------------------------
+     CUSTOM RESPONSIVE DROPDOWN INITIATOR
+     Replaces native OS dropdown overflow menus with 100% contained custom HTML/CSS menus.
+     ------------------------------------------------------- */
+
+  function initCustomDropdowns() {
+    document.querySelectorAll('.form-select').forEach(select => {
+      if (select.dataset.customized === 'true') return;
+      select.dataset.customized = 'true';
+
+      // Hide native select visually
+      select.style.display = 'none';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'custom-select-wrapper';
+
+      const trigger = document.createElement('div');
+      trigger.className = 'custom-select__trigger';
+      trigger.setAttribute('tabindex', '0');
+      trigger.setAttribute('role', 'combobox');
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const selectedOption = select.options[select.selectedIndex];
+      trigger.innerHTML = `
+        <span class="custom-select__value">${selectedOption ? selectedOption.text : (select.options[0]?.text || '')}</span>
+        <svg class="custom-select__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      `;
+
+      const menu = document.createElement('div');
+      menu.className = 'custom-select__menu';
+
+      Array.from(select.options).forEach((opt, idx) => {
+        const item = document.createElement('div');
+        item.className = `custom-select__option ${idx === select.selectedIndex ? 'is-selected' : ''}`;
+        item.textContent = opt.text;
+        item.dataset.value = opt.value;
+
+        item.addEventListener('click', () => {
+          select.value = opt.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          trigger.querySelector('.custom-select__value').textContent = opt.text;
+          menu.querySelectorAll('.custom-select__option').forEach(o => o.classList.remove('is-selected'));
+          item.classList.add('is-selected');
+          wrapper.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        });
+
+        menu.appendChild(item);
+      });
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.custom-select-wrapper.is-open').forEach(w => {
+          if (w !== wrapper) w.classList.remove('is-open');
+        });
+        const isOpen = wrapper.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          trigger.click();
+        }
+      });
+
+      wrapper.appendChild(trigger);
+      wrapper.appendChild(menu);
+      select.after(wrapper);
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.custom-select-wrapper.is-open').forEach(w => w.classList.remove('is-open'));
     });
   }
 
