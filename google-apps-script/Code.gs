@@ -2,10 +2,28 @@
  * BihariBuilder — Google Apps Script Backend Web App & Form Trigger
  * Version: 2.1 (UTF-8 & HTML Entity Safe)
  *
- * Automatically sends:
- * 1. Formatted HTML Notification Email to info@biharibuilder.com on new inquiry
- * 2. Logs every submission in Google Sheets with Date & Time
- * 3. Prepares WhatsApp confirmation payload for the client's mobile number
+ * ============================================================================
+ * LIVE DEPLOYMENT METADATA
+ * ============================================================================
+ * Deployment ID : AKfycbxFrT4siPxex26VQNGfVveXwnYdvKmLzRNMiHmyRfl1V9g0tJGX27SiA3Y6pWDzJLph
+ * Web App URL   : https://script.google.com/macros/s/AKfycbxFrT4siPxex26VQNGfVveXwnYdvKmLzRNMiHmyRfl1V9g0tJGX27SiA3Y6pWDzJLph/exec
+ * Library URL   : https://script.google.com/macros/library/d/1MFEBWbNJvKGd9Y2QmW7X7CmtGZ9ghiDNVzEXmrLyjFpUCNUxg1Iew6CY/2
+ * Target Email  : info@biharibuilder.com
+ * Linked Config : assets/js/config.js (estimateFormUrl)
+ * ============================================================================
+ * 
+ * AUTOMATIC BACKEND ACTIONS:
+ * 1. Formatted HTML Notification Email sent to info@biharibuilder.com on new inquiry
+ * 2. Logs every inquiry in Google Sheets with Date, Client Name, Mobile, City, Project Type & Budget
+ * 3. Prepares WhatsApp confirmation payload for client's mobile number
+ *
+ * DEPLOYMENT & MAINTENANCE STEPS:
+ * 1. Open Google Apps Script: https://script.google.com/home
+ * 2. Select your BihariBuilder project.
+ * 3. Select all code (Ctrl+A), delete, and paste this updated Code.gs content.
+ * 4. Save project (Ctrl+S).
+ * 5. Click "Deploy" > "Manage deployments".
+ * 6. Click Edit (pencil icon) -> Select Version: "New version" -> Click "Deploy".
  */
 
 // CONFIGURATION
@@ -146,7 +164,7 @@ function sendWhatsAppToClient(inquiry) {
  * Send Formatted HTML Email Notification to info@biharibuilder.com
  */
 function sendEmailNotification(inquiry) {
-  // Use safe standard ASCII characters in Subject line to prevent Gmail encoding corruption (â€”)
+  // Use safe standard ASCII characters in Subject line to prevent Gmail encoding corruption
   const subject = `[NEW INQUIRY] Construction Estimate Request - ${inquiry.name} (${inquiry.timestamp})`;
   
   const htmlBody = `
