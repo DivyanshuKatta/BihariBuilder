@@ -51,7 +51,7 @@ const CONFIG = Object.freeze({
 
   forms: {
     // Google Forms prefilled URL — replace with actual Form ID
-    estimateFormUrl: 'https://docs.google.com/forms/d/e/FORM_ID/formResponse',
+    estimateFormUrl: 'https://script.google.com/macros/s/AKfycbxFrT4siPxex26VQNGfVveXwnYdvKmLzRNMiHmyRfl1V9g0tJGX27SiA3Y6pWDzJLph/exec',
 
     // Field entry IDs from Google Forms URL
     // Obtain these by inspecting the pre-filled URL from Google Forms

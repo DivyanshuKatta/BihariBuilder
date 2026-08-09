@@ -1,6 +1,6 @@
 /**
  * BihariBuilder — Google Apps Script Backend Web App & Form Trigger
- * Version: 2.0
+ * Version: 2.1 (UTF-8 & HTML Entity Safe)
  *
  * Automatically sends:
  * 1. Formatted HTML Notification Email to info@biharibuilder.com on new inquiry
@@ -28,11 +28,11 @@ function doPost(e) {
 
     const inquiry = {
       timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      name: data['full-name'] || data['name'] || "Valued Client",
-      phone: data['phone'] || "N/A",
-      city: data['city'] || "N/A",
-      projectType: data['project-type'] || data['projectType'] || "General Inquiry",
-      budget: data['budget'] || "Not Specified"
+      name: sanitizeText(data['full-name'] || data['name'] || "Valued Client"),
+      phone: sanitizeText(data['phone'] || "N/A"),
+      city: sanitizeText(data['city'] || "N/A"),
+      projectType: sanitizeText(data['project-type'] || data['projectType'] || "General Inquiry"),
+      budget: cleanBudget(data['budget'] || "Not Specified")
     };
 
     // 1. Log to Google Sheet
@@ -56,6 +56,29 @@ function doPost(e) {
 }
 
 /**
+ * Clean up text inputs to prevent encoding issues
+ */
+function sanitizeText(val) {
+  if (!val) return "";
+  return String(val)
+    .replace(/[–—]/g, "-")
+    .trim();
+}
+
+/**
+ * Format budget cleanly using "Rs." and standard dash to avoid email encoding corruption
+ */
+function cleanBudget(val) {
+  if (!val) return "Not Specified";
+  let str = String(val);
+  // Replace Rupee symbols or mis-encoded question marks before numbers with Rs.
+  str = str.replace(/[\u20B9₹]/g, "Rs. ");
+  str = str.replace(/\?\s*(\d+)/g, "Rs. $1");
+  str = str.replace(/[–—]/g, "-");
+  return str.trim();
+}
+
+/**
  * Log inquiry to active Spreadsheet
  */
 function logToSheet(inquiry) {
@@ -76,7 +99,6 @@ function logToSheet(inquiry) {
 
 /**
  * Send Automated Backend WhatsApp Message Directly to Client's Mobile Number
- * (No browser windows, no client app redirects, zero desktop app popups)
  */
 function sendWhatsAppToClient(inquiry) {
   try {
@@ -87,21 +109,19 @@ function sendWhatsAppToClient(inquiry) {
     }
 
     const message = 
-      `🏗️ *BihariBuilder — Construction Estimate Inquiry Received!*\n\n` +
+      `*BihariBuilder - Construction Estimate Inquiry Received!*\n\n` +
       `Dear ${inquiry.name},\n\n` +
       `Thank you for submitting your estimate request on Biharibuilder.com!\n\n` +
-      `📋 *Your Inquiry Summary:*\n` +
-      `• *Location:* ${inquiry.city}\n` +
-      `• *Project Type:* ${inquiry.projectType}\n` +
-      `• *Estimated Budget:* ${inquiry.budget}\n` +
-      `• *Date & Time:* ${inquiry.timestamp}\n\n` +
+      `*Your Inquiry Summary:*\n` +
+      `- *Location:* ${inquiry.city}\n` +
+      `- *Project Type:* ${inquiry.projectType}\n` +
+      `- *Estimated Budget:* ${inquiry.budget}\n` +
+      `- *Date & Time:* ${inquiry.timestamp}\n\n` +
       `Our senior civil engineering team has logged your plot details and will contact you within *8 hours* with your itemized rate card & 3D floor plan.\n\n` +
-      `_BihariBuilder — Engineering Excellence from Plot to Keys._`;
+      `_BihariBuilder - Engineering Excellence from Plot to Keys._`;
 
-    // OPTION 1: UltraMsg (Popular Free WhatsApp Gateway for Google Apps Script)
-    // Get Instance ID & Token from https://ultramsg.com (or Twilio/Wati/Meta Cloud API)
-    const ULTRAMSG_INSTANCE_ID = "instance102345"; // Replace with your UltraMsg Instance ID
-    const ULTRAMSG_TOKEN       = "token_xyz123";    // Replace with your UltraMsg Token
+    const ULTRAMSG_INSTANCE_ID = "instance102345"; 
+    const ULTRAMSG_TOKEN       = "token_xyz123";    
 
     if (ULTRAMSG_INSTANCE_ID && !ULTRAMSG_INSTANCE_ID.includes("instance102345")) {
       const url = `https://api.ultramsg.com/${ULTRAMSG_INSTANCE_ID}/messages/chat`;
@@ -126,17 +146,18 @@ function sendWhatsAppToClient(inquiry) {
  * Send Formatted HTML Email Notification to info@biharibuilder.com
  */
 function sendEmailNotification(inquiry) {
-  const subject = `[NEW INQUIRY] Construction Estimate Request — ${inquiry.name} (${inquiry.timestamp})`;
+  // Use safe standard ASCII characters in Subject line to prevent Gmail encoding corruption (â€”)
+  const subject = `[NEW INQUIRY] Construction Estimate Request - ${inquiry.name} (${inquiry.timestamp})`;
   
   const htmlBody = `
     <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
       <div style="background: #081C3A; padding: 24px; text-align: center;">
-        <h2 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800;">🏗️ ${COMPANY_NAME}</h2>
-        <p style="color: #0FA3A3; margin: 4px 0 0 0; font-size: 14px; font-weight: 600;">NEW CONSTRUCTION INQUIRY</p>
+        <h2 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0.5px;">${COMPANY_NAME}</h2>
+        <p style="color: #0FA3A3; margin: 6px 0 0 0; font-size: 13px; font-weight: 700; letter-spacing: 1px;">NEW CONSTRUCTION INQUIRY</p>
       </div>
       
       <div style="padding: 32px; color: #1e293b;">
-        <p style="font-size: 16px; margin-top: 0; line-height: 1.5;">A new construction estimate inquiry was submitted on the website:</p>
+        <p style="font-size: 15px; margin-top: 0; line-height: 1.5; color: #334155;">A new construction estimate inquiry was submitted on the website:</p>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr style="border-bottom: 1px solid #f1f5f9;">
@@ -163,7 +184,7 @@ function sendEmailNotification(inquiry) {
           </tr>
           <tr>
             <td style="padding: 12px 0; font-weight: 600; color: #64748b;">Estimated Budget</td>
-            <td style="padding: 12px 0; font-weight: 600; color: #081C3A;">${inquiry.budget}</td>
+            <td style="padding: 12px 0; font-weight: 700; color: #081C3A;">${inquiry.budget}</td>
           </tr>
         </table>
 
@@ -175,7 +196,7 @@ function sendEmailNotification(inquiry) {
       </div>
       
       <div style="background: #F1F5F9; padding: 16px; text-align: center; font-size: 12px; color: #64748b;">
-        © 2026 ${COMPANY_NAME}. All rights reserved.
+        &copy; 2026 ${COMPANY_NAME}. All rights reserved.
       </div>
     </div>
   `;
@@ -196,11 +217,11 @@ function onFormSubmit(e) {
   
   const inquiry = {
     timestamp: values[0] || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-    name: values[1] || "Valued Client",
-    phone: values[2] || "N/A",
-    city: values[3] || "N/A",
-    projectType: values[4] || "General Inquiry",
-    budget: values[5] || "Not Specified"
+    name: sanitizeText(values[1] || "Valued Client"),
+    phone: sanitizeText(values[2] || "N/A"),
+    city: sanitizeText(values[3] || "N/A"),
+    projectType: sanitizeText(values[4] || "General Inquiry"),
+    budget: cleanBudget(values[5] || "Not Specified")
   };
 
   sendEmailNotification(inquiry);
